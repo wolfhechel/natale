@@ -1,0 +1,3 @@
+[submodule "build-host"]
+	path = build-host
+	url = okuejina.net:code/build-host.git
