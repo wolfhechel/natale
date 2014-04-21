@@ -2,15 +2,7 @@
 
 fetch http://www.cpan.org/src/5.0/perl-5.18.2.tar.bz2 d549b16ee4e9210988da39193a9389c1
 
-
-cat >> hints/linux.sh << "EOF"
-locincpth=""
-loclibpth=""
-glibpth="${prefix}/lib"
-usrinc="${prefix}/include"
-libc="$(cd ${prefix}/lib; echo $PWD/$(readlink libc.so.6))"
-gcc=gcc
-EOF
+curl http://www.linuxfromscratch.org/patches/lfs/systemd/perl-5.18.2-libc-1.patch | patch -Np1
 
 sh Configure -des -Dprefix=/tools
 

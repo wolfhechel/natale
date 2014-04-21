@@ -13,4 +13,4 @@ chmod -v u+w /tools/lib/libtcl*.so
 
 make install-private-headers
 
-(cd /tools/bin; ln -sv `ls tclsh[0-9.]` tclsh)
+(cd /tools/bin; ln -sv `ls tclsh[0-9.]*` tclsh)

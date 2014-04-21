@@ -5,6 +5,8 @@ set -o nounset	# exit if variable not initalized
 set +h		# disable hashall
 shopt -s -o pipefail
 
+sleep 5
+
 _run_directory=$PWD
 _src_cache=$PWD/src_cache
 
@@ -30,12 +32,9 @@ function download_file() {
   local filename=$(basename $url)
 
   if [ ! -f "${_src_cache}/$filename" ]; then
-    echo "Downloading $filename:"
-    echo -n "    "
-    wget -P "${_src_cache}" --progress=dot $url 2>&1 | grep --line-buffered "%" | \
-        sed -u -e "s,\.,,g" | awk '{printf("\b\b\b\b%4s", $2)}'
-    echo -ne "\b\b\b\b"
-    echo " done"
+    echo "Downloading $filename"
+
+    (cd "${_src_cache}"; curl -L -O $url)
   fi
 
   if ! validate_file "${_src_cache}/$filename" $md5; then
@@ -55,7 +54,7 @@ function fetch() {
 
   mkdir $pkgname
 
-  tar -xf "${_src_cache}/$filename" --strip-components=1 -C $pkgname
+  tar -xvf "${_src_cache}/$filename" --strip-components=1 -C $pkgname
 
   if [ "$#" -lt 3 ] || [ "$3" != "dl-only" ]; then
     cd $pkgname

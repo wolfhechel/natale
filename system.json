@@ -1,0 +1,44 @@
+{
+  "variables": {
+    "build_path": "/mnt/lfs/sources",
+    "cores": 6,
+    "memory": 2048
+  },
+  "builders": [
+  {
+      "name": "natale",
+      "type": "virtualbox-ovf",
+      "source_path": "build-host/output-build-host/packer-build-host.ovf",
+      "ssh_username": "lfs",
+      "headless": true,
+      "shutdown_command": "su - root -c poweroff",
+      "vboxmanage": [
+        ["modifyvm", "{{ .Name }}", "--cpus", "{{ user `cores` }}"],
+        ["modifyvm", "{{ .Name }}", "--memory", "{{ user `memory` }}"]
+      ]
+    }
+  ],
+
+  "provisioners": [
+    {
+      "type": "file",
+      "source": "provisioning/toolchain/",
+      "destination": "{{user `build_path`}}"
+    },
+    {
+      "type": "shell",
+      "execute_command": "chmod +x {{ .Path }}; env -i {{ .Vars }} bash -i {{ .Path }}",
+      "environment_vars": [
+        "HOME=$HOME",
+        "TERM=$TERM",
+        "MAKEFLAGS='-j {{user `cores`}}'"
+      ],
+      "inline": [
+        "set -o errexit",
+        "trap read EXIT",
+        "cd {{user `build_path`}}",
+        "for step in [0-9]*-*.sh; do bash $step; done"
+      ]
+    }
+  ]
+}
