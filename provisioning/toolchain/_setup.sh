@@ -33,8 +33,7 @@ function download_file() {
 
   if [ ! -f "${_src_cache}/$filename" ]; then
     echo "Downloading $filename"
-
-    (cd "${_src_cache}"; curl -L -O $url)
+    wget -P "${_src_cache}" $url --progress=dot
   fi
 
   if ! validate_file "${_src_cache}/$filename" $md5; then

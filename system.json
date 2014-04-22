@@ -35,7 +35,6 @@
       ],
       "inline": [
         "set -o errexit",
-        "trap read EXIT",
         "cd {{user `build_path`}}",
         "for step in [0-9]*-*.sh; do bash $step; done"
       ]
