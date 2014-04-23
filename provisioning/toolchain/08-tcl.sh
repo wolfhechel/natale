@@ -1,5 +1,3 @@
-. ./_setup.sh
-
 fetch ftp://ftp.tcl.tk/pub/tcl/tcl8_6/tcl8.6.1-src.tar.gz aae4b701ee527c6e4e1a6f9c7399882e
 
 cd unix

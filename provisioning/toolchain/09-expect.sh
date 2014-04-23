@@ -1,5 +1,3 @@
-. ./_setup.sh
-
 fetch http://prdownloads.sourceforge.net/expect/expect5.45.tar.gz 44e1a4f4c877e9ddc5a542dfa7ecc92b
 
 sed -i 's:/usr/local/bin:/bin:' configure

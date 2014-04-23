@@ -1,5 +1,3 @@
-. ./_setup.sh
-
 fetch http://ftp.gnu.org/gnu/glibc/glibc-2.19.tar.xz e26b8cc666b162f999404b03970f14e4
 
 if [ ! -r /usr/include/rpc/types.h ]; then

@@ -1,5 +1,3 @@
-. ./_setup.sh
-
 fetch http://ftp.gnu.org/gnu/binutils/binutils-2.24.tar.bz2 e0f71a7b2ddab0f8612336ac81d9636b
 
 mkdir -v ../binutils-build

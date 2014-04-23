@@ -1,7 +1,7 @@
 {
   "variables": {
     "build_path": "/mnt/lfs/sources",
-    "cores": 6,
+    "cores": 4,
     "memory": 2048
   },
   "builders": [
@@ -30,14 +30,10 @@
       "execute_command": "chmod +x {{ .Path }}; env -i {{ .Vars }} bash -i {{ .Path }}",
       "environment_vars": [
         "HOME=$HOME",
-        "TERM=$TERM",
-        "MAKEFLAGS='-j {{user `cores`}}'"
+        "TERM=$TERM"
       ],
-      "inline": [
-        "set -o errexit",
-        "cd {{user `build_path`}}",
-        "for step in [0-9]*-*.sh; do bash $step; done"
-      ]
+      "script": "provisioning/builder.sh",
+      "remote_path": "{{ user `build_path` }}/builder.sh"
     }
   ]
 }

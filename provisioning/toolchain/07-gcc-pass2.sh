@@ -1,5 +1,3 @@
-. ./_setup.sh
-
 fetch http://ftp.gnu.org/gnu/gcc/gcc-4.8.2/gcc-4.8.2.tar.bz2 a3d7d63b9cb6b6ea049469a0c4a43c9d
 
 cat gcc/limitx.h gcc/glimits.h gcc/limity.h > \
