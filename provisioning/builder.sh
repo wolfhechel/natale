@@ -6,6 +6,7 @@ set +h		      # Disable hashall
 
 shopt -s -o pipefail
 
+
 # Clear directory stack
 dirs -c
 
@@ -101,9 +102,17 @@ LDFLAGS="-Wl,-O1,--sort-common,--as-needed,-z,relro"
 export MAKEFLAGS CFLAGS CXXFLAGS LDFLAGS
 
 (
-  cd ${_run_directory};
+  cd ${_run_directory}
 
-  for step in [0-9]*-*.sh; do
+  # Find the range of steps to build
+  steps_found=$(ls [0-9]*-*.sh | sort -r | head -n1 | cut -d'-' -f1)
+  last_stage=${1-$steps_found}
+
+  if [ $last_stage -gt $steps_found ]; then
+    last_stage=$steps_found
+  fi
+
+  for step in $(seq -f '%02g-*.sh' 1 $last_stage); do
     . $step
 
     cleanup
