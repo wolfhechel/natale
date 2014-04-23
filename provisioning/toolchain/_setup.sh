@@ -53,7 +53,8 @@ function fetch() {
 
   mkdir $pkgname
 
-  tar -xvf "${_src_cache}/$filename" --strip-components=1 -C $pkgname
+  echo "Unpacking ${filename}"
+  tar -xf "${_src_cache}/$filename" --strip-components=1 -C $pkgname
 
   if [ "$#" -lt 3 ] || [ "$3" != "dl-only" ]; then
     cd $pkgname
