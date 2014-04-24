@@ -45,7 +45,7 @@ function download_file() {
 
   if [ ! -f "${_src_cache}/$filename" ]; then
     echo "Downloading $filename"
-    wget -P "${_src_cache}" $url --progress=dot
+    wget -P "${_src_cache}" $url --progress=dot 2>&1
   fi
 
   if ! validate_file "${_src_cache}/$filename" $md5; then
@@ -101,6 +101,9 @@ LDFLAGS="-Wl,-O1,--sort-common,--as-needed,-z,relro"
 
 export MAKEFLAGS CFLAGS CXXFLAGS LDFLAGS
 
+stderr_color=`echo -e '\033[31m'`
+reset_color=`echo -e '\033[0m'`
+
 (
   cd ${_run_directory}
 
@@ -113,7 +116,8 @@ export MAKEFLAGS CFLAGS CXXFLAGS LDFLAGS
   fi
 
   for step in $(seq -f '%02g-*.sh' 1 $last_stage); do
-    . $step
+    prefix="${reset_color}${step%*.sh}: "
+    (. $step) 2> >(sed "s/^/${stderr_color}/") > >(sed "s/^/${prefix}${reset_color}/")
 
     cleanup
   done
