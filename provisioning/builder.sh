@@ -117,9 +117,12 @@ tools=${tools-/tools}
     last_stage=$steps_found
   fi
 
-  for step in $(seq -f '%02g-*.sh' 1 $last_stage); do
-    prefix="${reset_color}${step%*.sh}: "
-    (. $step) 2> >(sed "s/^/${stderr_color}/") > >(sed "s/^/${prefix}${reset_color}/")
+  for script in $(seq -f '%02g-*.sh' 1 $last_stage); do
+    stage=${script%*.sh}
+    _stage_number=${stage%%-*}
+    _stage_name=${stage#*-}
+    prefix="${reset_color}[${_stage_number}/${last_stage}] ${_stage_name}: "
+    (. $script) 2> >(sed "s#^#${stderr_color}#") > >(sed "s#^#${prefix}${reset_color}#")
 
     cleanup
   done
