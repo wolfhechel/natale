@@ -1,4 +1,4 @@
-fetch http://ftp.gnu.org/gnu/gcc/gcc-4.8.2/gcc-4.8.2.tar.bz2 a3d7d63b9cb6b6ea049469a0c4a43c9d
+fetch http://ftp.gnu.org/gnu/gcc/gcc-4.9.0/gcc-4.9.0.tar.bz2 9709b49ae0e904cbb0a6a1b62853b556
 
 gxx_include_dir=${tools}/$LFS_TGT/include/c++/$(cat gcc/BASE-VER)
 

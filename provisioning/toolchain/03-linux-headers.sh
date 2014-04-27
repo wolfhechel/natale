@@ -1,4 +1,4 @@
-fetch https://www.kernel.org/pub/linux/kernel/v3.x/linux-3.14.tar.xz b621207b3f6ecbb67db18b13258f8ea8
+fetch https://www.kernel.org/pub/linux/kernel/v3.x/linux-3.14.2.tar.xz 28b68cde77997ddafab3c4e16cefae7d
 
 make mrproper
 

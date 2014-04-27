@@ -9,6 +9,7 @@ RANLIB=$LFS_TGT-ranlib           \
 ../binutils/configure            \
     --prefix=${tools}            \
     --disable-nls                \
+    --disable-werror             \
     --with-lib-path=${tools}/lib \
     --with-sysroot
 
