@@ -2,9 +2,9 @@ fetch http://prdownloads.sourceforge.net/expect/expect5.45.tar.gz 44e1a4f4c877e9
 
 sed -i 's:/usr/local/bin:/bin:' configure
 
-./configure --prefix=/tools       \
-            --with-tcl=/tools/lib \
-            --with-tclinclude=/tools/include
+./configure --prefix=${tools}                   \
+            --with-tcl=${tools}/lib             \
+            --with-tclinclude=${tools}/include
 
 make
 

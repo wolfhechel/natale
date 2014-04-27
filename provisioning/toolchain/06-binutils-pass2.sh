@@ -3,13 +3,13 @@ fetch http://ftp.gnu.org/gnu/binutils/binutils-2.24.tar.bz2 e0f71a7b2ddab0f86123
 mkdir -v ../binutils-build
 cd ../binutils-build
 
-CC=$LFS_TGT-gcc                \
-AR=$LFS_TGT-ar                 \
-RANLIB=$LFS_TGT-ranlib         \
-../binutils/configure          \
-    --prefix=/tools            \
-    --disable-nls              \
-    --with-lib-path=/tools/lib \
+CC=$LFS_TGT-gcc                  \
+AR=$LFS_TGT-ar                   \
+RANLIB=$LFS_TGT-ranlib           \
+../binutils/configure            \
+    --prefix=${tools}            \
+    --disable-nls                \
+    --with-lib-path=${tools}/lib \
     --with-sysroot
 
 make
@@ -18,4 +18,4 @@ make install
 
 make -C ld clean
 make -C ld LIB_PATH=/usr/lib:/lib
-cp -v ld/ld-new /tools/bin
+cp -v ld/ld-new ${tools}/bin

@@ -45,11 +45,11 @@ EOF
 
 cat hints/linux.sh
 
-sh Configure -des -Dprefix=/tools
+sh Configure -des -Dprefix=${tools}
 
 make
 
 make DESTDIR=perl_tools install.perl
 
-cp -v perl_tools/tools/bin/{perl,pod2man} /tools/bin
-cp -R perl_tools/tools/lib/perl5 /tools/lib
+cp -v perl_tools${tools}/bin/{perl,pod2man} ${tools}/bin
+cp -R perl_tools${tools}/lib/perl5 ${tools}/lib

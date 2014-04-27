@@ -104,6 +104,8 @@ export MAKEFLAGS CFLAGS CXXFLAGS LDFLAGS
 stderr_color=`echo -e '\033[31m'`
 reset_color=`echo -e '\033[0m'`
 
+tools=${tools-/tools}
+
 (
   cd ${_run_directory}
 
