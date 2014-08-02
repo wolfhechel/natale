@@ -104,14 +104,14 @@ export MAKEFLAGS CFLAGS CXXFLAGS LDFLAGS
 stderr_color=`echo -e '\033[31m'`
 reset_color=`echo -e '\033[0m'`
 
-tools=${tools:-/tools}
+tools=${tools-/tools}
 
 (
   cd ${_run_directory}
 
   # Find the range of steps to build
   steps_found=$(ls [0-9]*-*.sh | sort -r | head -n1 | cut -d'-' -f1)
-  last_stage=${1:-$steps_found}
+  last_stage=${1-$steps_found}
 
   if [ $last_stage -gt $steps_found ]; then
     last_stage=$steps_found

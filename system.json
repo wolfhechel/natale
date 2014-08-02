@@ -2,8 +2,7 @@
   "variables": {
     "build_path": "/mnt/lfs/sources",
     "cores": 4,
-    "memory": 2048,
-    "last_stage": ""
+    "memory": 2048
   },
   "builders": [
   {
@@ -28,7 +27,7 @@
     },
     {
       "type": "shell",
-      "execute_command": "chmod +x {{ .Path }}; env -i {{ .Vars }} bash -i {{ .Path }} {{ user `last_stage` }}",
+      "execute_command": "chmod +x {{ .Path }}; env -i {{ .Vars }} bash -i {{ .Path }}",
       "environment_vars": [
         "HOME=$HOME",
         "TERM=$TERM"
